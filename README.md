@@ -1,16 +1,6 @@
-# Fabric Example Mod
+# Wool
 
-## Setup
+A Fabric mod which adds support for most Bukkit plugins
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
-
-```
-./gradlew idea
-```
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## Limitations
+The current version of the plugin does not support access to NMS packages within Bukkit Plugins and will crash. Any references to Paper within the plugin will not work. For plugins which support paper, I advise using PaperLib to compensate for the platform.
