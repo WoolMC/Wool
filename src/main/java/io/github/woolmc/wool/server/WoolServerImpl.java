@@ -2,17 +2,23 @@ package io.github.woolmc.wool.server;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.WeakHashMap;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Location;
@@ -53,20 +59,54 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.SimplePluginManager;
+import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
+import com.mojang.authlib.GameProfile;
+
 import io.github.woolmc.wool.WoolConstants;
+import io.github.woolmc.wool.server.player.WoolServerPlayer;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.potion.Potions;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.OperatorEntry;
+import net.minecraft.server.ServerConfigEntry;
 
 public class WoolServerImpl implements Server {
 	
 	private final MinecraftServer handle;
-
+	private final Logger logger = Logger.getLogger("Wool");
+	private WeakHashMap<UUID, WoolServerPlayer> players;
+	
+	private final ServicesManager servicesManager = new SimpleServicesManager();
+	private final SimpleHelpMap helpMap = new SimpleHelpMap(this); // CB
+    private final StandardMessenger messenger = new StandardMessenger();
+	private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap);
+	
+	
+	
 	public WoolServerImpl(MinecraftServer handle) {
 		this.handle = handle;
+		
+		Bukkit.setServer(this); // Not client friendly
+		// Register all the Enchantments and PotionTypes now so we can stop new registration immediately after
+        Enchantments.SHARPNESS.getClass();
+        org.bukkit.enchantments.Enchantment.stopAcceptingRegistrations();
+
+        Potion.setPotionBrewer(new CraftPotionBrewer()); // CB
+        Potions.HARMING.getClass();
+        PotionEffectType.stopAcceptingRegistrations();
+        // Ugly hack :(
+        
+        
+        
 	}
 	
 	@Override
@@ -97,8 +137,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return players.values();
 	}
 
 	@Override
@@ -130,30 +169,28 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean getGenerateStructures() {
-		// TODO Auto-generated method stub
-		return false;
+		return getHandle().shouldGenerateStructures();
 	}
 
 	@Override
 	public boolean getAllowEnd() {
 		// TODO Auto-generated method stub
-		return ;
-	}
-
-	@Override
-	public boolean getAllowNether() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+	public boolean getAllowNether() {
+		return getHandle().isNetherAllowed();
+	}
+
+	@Override
 	public boolean hasWhitelist() {
-		// TODO Auto-generated method stub
 		return getHandle().isWhitelistEnabled();
 	}
 
 	@Override
 	public void setWhitelist(boolean newValue) {
+        getHandle().getPlayerManager().setWhitelistEnabled(newValue);
 		getHandle().setWhitelistEnabled(newValue);
 
 	}
@@ -172,8 +209,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public int broadcastMessage(String message) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 0; // TODO
 	}
 
 	@Override
@@ -208,26 +244,66 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Player getPlayer(String name) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Player found = getPlayerExact(name);
+		
+		if(found != null) {
+			return found;
+		}
+		
+		String lowerName = name.toLowerCase(java.util.Locale.ENGLISH);
+        int delta = Integer.MAX_VALUE;
+        for (Player player : getOnlinePlayers()) {
+            if (player.getName().toLowerCase(java.util.Locale.ENGLISH).startsWith(lowerName)) {
+                int curDelta = Math.abs(player.getName().length() - lowerName.length());
+                if (curDelta < delta) {
+                    found = player;
+                    delta = curDelta;
+                }
+                if (curDelta == 0) break;
+            }
+        }
+        return found;
 	}
 
 	@Override
 	public Player getPlayerExact(String name) {
-		// TODO Auto-generated method stub
+		for (Player player : players.values()) {
+			if(player.getName().equals(name)) {
+				return player;
+			}
+		}
 		return null;
 	}
 
 	@Override
-	public List<Player> matchPlayer(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Player> matchPlayer(String partialName) {
+		Validate.notNull(partialName, "PartialName cannot be null");
+
+        List<Player> matchedPlayers = new ArrayList<Player>();
+
+        for (Player iterPlayer : this.getOnlinePlayers()) {
+            String iterPlayerName = iterPlayer.getName();
+
+            if (partialName.equalsIgnoreCase(iterPlayerName)) {
+                // Exact match
+                matchedPlayers.clear();
+                matchedPlayers.add(iterPlayer);
+                break;
+            }
+            if (iterPlayerName.toLowerCase(java.util.Locale.ENGLISH).contains(partialName.toLowerCase(java.util.Locale.ENGLISH))) {
+                // Partial match
+                matchedPlayers.add(iterPlayer);
+            }
+        }
+        
+        return matchedPlayers;
+
 	}
 
 	@Override
 	public Player getPlayer(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		return players.get(id);
 	}
 
 	@Override
@@ -323,8 +399,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Logger getLogger() {
-		// TODO Auto-generated method stub
-		return null;
+		return logger ;
 	}
 
 	@Override
@@ -341,8 +416,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-		// TODO Auto-generated method stub
-		return false;
+		return getHandle().getCommandManager().execute(serverCommandSource_1, string_1); // TODO finish
 	}
 
 	@Override
@@ -411,7 +485,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public void shutdown() {
-		// TODO Client and Server dependant code
+		getHandle().stop(false);
 	}
 
 	@Override
@@ -434,26 +508,32 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Set<String> getIPBans() {
-		// TODO Auto-generated method stub
-		return null;
+		return new HashSet<String>(Arrays.asList(getHandle().getPlayerManager().getIpBanList().getNames()));
 	}
 
 	@Override
 	public void banIP(String address) {
-		// TODO Auto-generated method stub
-
+        Validate.notNull(address, "Address cannot be null.");
+        
+		this.getBanList(org.bukkit.BanList.Type.IP).addBan(address, null, null, null);
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		// TODO Auto-generated method stub
+        Validate.notNull(address, "Address cannot be null.");
 
+        this.getBanList(org.bukkit.BanList.Type.IP).pardon(address);
 	}
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
+
+        for (ServerConfigEntry entry : getHandle().getPlayerManager().getUserBanList().values()) {
+            result.add(getOfflinePlayer((GameProfile) entry.getName()));
+        }
+
+        return result;
 	}
 
 	@Override
@@ -464,8 +544,13 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Set<OfflinePlayer> getOperators() {
-		// TODO Auto-generated method stub
-		return null;
+		Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
+
+        for (OperatorEntry entry : getHandle().getPlayerManager().getOpList().values()) {
+            result.add(getOfflinePlayer((GameProfile) entry.getName()));
+        }
+
+        return result;
 	}
 
 	@Override
@@ -566,13 +651,11 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean isPrimaryThread() {
-		// TODO Auto-generated method stub
-		return false;
+		return getHandle().getThread() == Thread.currentThread();
 	}
 
 	@Override
 	public String getMotd() {
-		// TODO Auto-generated method stub
 		return getHandle().getServerMotd();
 	}
 
