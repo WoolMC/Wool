@@ -5,6 +5,11 @@ import org.bukkit.loot.LootTable;
 
 public abstract class WoolMob extends WoolLivingEntity implements Mob {
 
+	protected WoolMob(net.minecraft.entity.LivingEntity handle) {
+		super(handle);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public void setLootTable(LootTable table) {
 		// TODO Auto-generated method stub

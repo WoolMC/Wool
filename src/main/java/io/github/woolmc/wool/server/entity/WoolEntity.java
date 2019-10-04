@@ -26,8 +26,12 @@ import org.bukkit.util.Vector;
 import net.minecraft.entity.Entity;
 
 public abstract class WoolEntity implements org.bukkit.entity.Entity {
-
-	private Entity handle;
+	
+	protected WoolEntity(Entity handle) {
+		this.handle = handle;
+	}
+	
+	protected Entity handle;
 	
 
 	// IMPL Methods

@@ -34,7 +34,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class WoolServerPlayer extends WoolPlayer implements Player {
 	
 	public WoolServerPlayer(ServerPlayerEntity sPlayerEntity) {
-		
+		super(sPlayerEntity);
 	}
 	
 	private ServerPlayerEntity handle;
@@ -928,5 +928,10 @@ public class WoolServerPlayer extends WoolPlayer implements Player {
 	public void openBook(ItemStack book) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.PLAYER;
 	}
 }

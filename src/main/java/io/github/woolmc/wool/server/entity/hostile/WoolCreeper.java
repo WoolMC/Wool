@@ -1,10 +1,17 @@
 package io.github.woolmc.wool.server.entity.hostile;
 
 import org.bukkit.entity.Creeper;
+import org.bukkit.entity.EntityType;
 
 import io.github.woolmc.wool.server.entity.WoolMob;
+import net.minecraft.entity.mob.CreeperEntity;
 
 public class WoolCreeper extends WoolMob implements Creeper {
+
+	protected WoolCreeper(CreeperEntity handle) {
+		super(handle);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean isPowered() {
@@ -52,6 +59,11 @@ public class WoolCreeper extends WoolMob implements Creeper {
 	public void ignite() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.CREEPER;
 	}
 
 }

@@ -1,11 +1,18 @@
 package io.github.woolmc.wool.server.entity.hostile.zombie;
 
 import org.bukkit.entity.Drowned;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager.Profession;
 
 import io.github.woolmc.wool.server.entity.WoolMob;
+import net.minecraft.entity.mob.DrownedEntity;
 
 public class WoolDrowned extends WoolMob implements Drowned {
+
+	public WoolDrowned(DrownedEntity handle) {
+		super(handle);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean isBaby() {
@@ -59,6 +66,11 @@ public class WoolDrowned extends WoolMob implements Drowned {
 	public void setConversionTime(int time) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.DROWNED;
 	}
 
 }

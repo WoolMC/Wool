@@ -12,15 +12,20 @@ import org.bukkit.entity.Villager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.InventoryView.Property;
-
-import io.github.woolmc.wool.server.entity.WoolLivingEntity;
-
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MainHand;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.PlayerInventory;
 
+import io.github.woolmc.wool.server.entity.WoolLivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+
 public abstract class WoolPlayer extends WoolLivingEntity implements HumanEntity {
+
+	protected WoolPlayer(PlayerEntity handle) {
+		super(handle);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public PlayerInventory getInventory() {

@@ -1,12 +1,19 @@
 package io.github.woolmc.wool.server.entity.hostile.zombie;
 
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager.Profession;
 import org.bukkit.entity.ZombieVillager;
 
 import io.github.woolmc.wool.server.entity.WoolMob;
+import net.minecraft.entity.mob.ZombieVillagerEntity;
 
 public class WoolZombieVillager extends WoolMob implements ZombieVillager {
+
+	public WoolZombieVillager(ZombieVillagerEntity handle) {
+		super(handle);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean isBaby() {
@@ -72,6 +79,11 @@ public class WoolZombieVillager extends WoolMob implements ZombieVillager {
 	public void setConversionPlayer(OfflinePlayer conversionPlayer) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.ZOMBIE_VILLAGER;
 	}
 
 }

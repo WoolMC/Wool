@@ -1,11 +1,18 @@
 package io.github.woolmc.wool.server.entity.hostile.zombie;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Husk;
 import org.bukkit.entity.Villager.Profession;
 
 import io.github.woolmc.wool.server.entity.WoolMob;
+import net.minecraft.entity.mob.HuskEntity;
 
 public class WoolHusk extends WoolMob implements Husk {
+
+	public WoolHusk(HuskEntity handle) {
+		super(handle);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public boolean isBaby() {
@@ -59,6 +66,11 @@ public class WoolHusk extends WoolMob implements Husk {
 	public void setConversionTime(int time) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public EntityType getType() {
+		return EntityType.HUSK;
 	}
 
 }

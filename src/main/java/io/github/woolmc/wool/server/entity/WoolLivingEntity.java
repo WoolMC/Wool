@@ -24,6 +24,10 @@ import org.bukkit.util.Vector;
 
 public abstract class WoolLivingEntity extends WoolEntity implements LivingEntity {
 
+	protected WoolLivingEntity(net.minecraft.entity.LivingEntity handle) {
+		super(handle);
+	}
+
 	@Override
 	public AttributeInstance getAttribute(Attribute attribute) {
 		// TODO Auto-generated method stub
@@ -391,9 +395,10 @@ public abstract class WoolLivingEntity extends WoolEntity implements LivingEntit
 	}
 
 	@Override
-	public EntityType getType() {
-		// TODO Auto-generated method stub
-		return null;
+	public abstract EntityType getType();
+	
+	private net.minecraft.entity.LivingEntity getHandle() {
+		return (net.minecraft.entity.LivingEntity) handle;
 	}
 
 }
