@@ -18,12 +18,13 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "net.fabricmc.example.ExampleMod"
+    "server": [
+      "io.github.woolmc.wool.WoolServerMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "server.mixins.json",
+    "events.mixins.json"
   ],
 
   "depends": {
