@@ -1,11 +1,11 @@
 {
   "required": true,
-  "package": "net.fabricmc.example.mixin",
+  "package": "io.github.woolmc.wool.mixin.server",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+  	"MixinMinecraftServer$Brand"
   ],
   "client": [
-    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

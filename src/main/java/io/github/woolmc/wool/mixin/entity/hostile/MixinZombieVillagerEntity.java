@@ -1,14 +1,15 @@
-package io.github.woolmc.wool.mixin.entity;
+package io.github.woolmc.wool.mixin.entity.hostile;
 
 import org.bukkit.entity.ZombieVillager;
 import org.spongepowered.asm.mixin.Mixin;
 
+import io.github.woolmc.wool.mixin.entity.BukkitEntityAccess;
 import io.github.woolmc.wool.server.entity.hostile.zombie.WoolZombieVillager;
 import io.github.woolmc.wool.util.MixinHacks;
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 
 @Mixin(ZombieVillagerEntity.class)
-public class MixinZombieVillager implements BukkitEntityAccess<ZombieVillager> {
+public class MixinZombieVillagerEntity implements BukkitEntityAccess<ZombieVillager> {
 	
 	private ZombieVillager bukkitEntity;
 

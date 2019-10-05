@@ -24,7 +24,8 @@
   },
   "mixins": [
     "server.mixins.json",
-    "events.mixins.json"
+    "events.mixins.json",
+    "entities.mixins.json"
   ],
 
   "depends": {

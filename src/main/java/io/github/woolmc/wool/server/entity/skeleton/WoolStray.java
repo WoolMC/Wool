@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.StrayEntity;
 
 public class WoolStray extends WoolMob implements Stray {
 
-	protected WoolStray(StrayEntity handle) {
+	public WoolStray(StrayEntity handle) {
 		super(handle);
 		// TODO Auto-generated constructor stub
 	}

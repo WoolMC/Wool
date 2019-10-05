@@ -41,7 +41,7 @@ public class WoolServerPlayer extends WoolPlayer implements Player {
 	
 	// IMPL Methods
 	
-	private ServerPlayerEntity getHandle() {
+	public ServerPlayerEntity getHandle() {
 		return handle;
 	}
 

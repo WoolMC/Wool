@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.WitherSkeletonEntity;
 
 public class WoolWitherSkeleton extends WoolMob implements WitherSkeleton {
 
-	protected WoolWitherSkeleton(WitherSkeletonEntity handle) {
+	public WoolWitherSkeleton(WitherSkeletonEntity handle) {
 		super(handle);
 		// TODO Auto-generated constructor stub
 	}

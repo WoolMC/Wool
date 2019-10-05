@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 
+import io.github.woolmc.wool.mixin.util.FormattingAccess;
 import net.minecraft.text.ClickEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
@@ -19,6 +20,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 public class String2TextUtil {
+	/*
 	private static final Pattern LINK_PATTERN = Pattern.compile("((?:(?:https?):\\/\\/)?(?:[-\\w_\\.]{2,}\\.[a-z]{2,4}.*?(?=[\\.\\?!,;:]?(?:[" + String.valueOf(org.bukkit.ChatColor.COLOR_CHAR) + " \\n]|$))))");
     private static final Map<Character, Formatting> formatMap;
 
@@ -35,7 +37,7 @@ public class String2TextUtil {
     }
 
     public static ChatColor getColor(Formatting format) {
-        return ChatColor.getByChar(format.character);
+        return ChatColor.getByChar(((FormattingAccess) format).getCode());
     }
 
     private static class StringMessage {
@@ -273,4 +275,5 @@ public class String2TextUtil {
 
     private String2TextUtil() {
     }
+    */
 }

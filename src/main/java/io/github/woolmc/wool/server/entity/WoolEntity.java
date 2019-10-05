@@ -66,13 +66,13 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public void sendMessage(String message) {
-		getHandle().sendMessage(text_1); // TODO Convert to text
+		// getHandle().sendMessage(text_1); // TODO Convert to text
 	}
 
 
 	@Override
 	public void sendMessage(String[] messages) {
-		getHandle().sendMessage(text_1); // TODO Convert to text
+		// getHandle().sendMessage(text_1); // TODO Convert to text
 	}
 
 
@@ -174,13 +174,14 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public String getCustomName() {
-		return getHandle().getCustomName(); // TODO Convert to text
+		return null;
+		// return getHandle().getCustomName(); // TODO Convert to text
 	}
 
 
 	@Override
 	public void setCustomName(String name) {
-		getHandle().setCustomName(text_1); // TODO Conver to text
+		// getHandle().setCustomName(text_1); // TODO Conver to text
 	}
 
 

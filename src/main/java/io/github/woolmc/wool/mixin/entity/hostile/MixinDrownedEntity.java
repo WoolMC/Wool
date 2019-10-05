@@ -1,8 +1,9 @@
-package io.github.woolmc.wool.mixin.entity;
+package io.github.woolmc.wool.mixin.entity.hostile;
 
 import org.bukkit.entity.Drowned;
 import org.spongepowered.asm.mixin.Mixin;
 
+import io.github.woolmc.wool.mixin.entity.BukkitEntityAccess;
 import io.github.woolmc.wool.server.entity.hostile.zombie.WoolDrowned;
 import io.github.woolmc.wool.util.MixinHacks;
 import net.minecraft.entity.mob.DrownedEntity;

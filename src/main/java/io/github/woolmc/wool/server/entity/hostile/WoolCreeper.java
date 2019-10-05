@@ -8,7 +8,7 @@ import net.minecraft.entity.mob.CreeperEntity;
 
 public class WoolCreeper extends WoolMob implements Creeper {
 
-	protected WoolCreeper(CreeperEntity handle) {
+	public WoolCreeper(CreeperEntity handle) {
 		super(handle);
 		// TODO Auto-generated constructor stub
 	}

@@ -59,20 +59,24 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
-import com.mojang.authlib.GameProfile;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import io.github.woolmc.wool.Wool;
 import io.github.woolmc.wool.WoolConstants;
+import io.github.woolmc.wool.mixin.entity.BukkitEntityAccess;
 import io.github.woolmc.wool.server.player.WoolServerPlayer;
+import net.minecraft.command.arguments.EntityArgumentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.potion.Potions;
 import net.minecraft.server.MinecraftServer;
@@ -86,21 +90,22 @@ public class WoolServerImpl implements Server {
 	private WeakHashMap<UUID, WoolServerPlayer> players;
 	
 	private final ServicesManager servicesManager = new SimpleServicesManager();
-	private final SimpleHelpMap helpMap = new SimpleHelpMap(this); // CB
+	// private final SimpleHelpMap helpMap = new SimpleHelpMap(this); // CB TODO
     private final StandardMessenger messenger = new StandardMessenger();
-	private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap);
+	// private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap); TODO
 	
 	
 	
 	public WoolServerImpl(MinecraftServer handle) {
 		this.handle = handle;
 		
+		Wool.getInstance().setServer(this);
 		Bukkit.setServer(this); // Not client friendly
 		// Register all the Enchantments and PotionTypes now so we can stop new registration immediately after
         Enchantments.SHARPNESS.getClass();
         org.bukkit.enchantments.Enchantment.stopAcceptingRegistrations();
 
-        Potion.setPotionBrewer(new CraftPotionBrewer()); // CB
+        // Potion.setPotionBrewer(new CraftPotionBrewer()); // CB TODO
         Potions.HARMING.getClass();
         PotionEffectType.stopAcceptingRegistrations();
         // Ugly hack :(
@@ -416,7 +421,8 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-		return getHandle().getCommandManager().execute(serverCommandSource_1, string_1); // TODO finish
+		return false;
+		// return getHandle().getCommandManager().execute(serverCommandSource_1, string_1); // TODO finish
 	}
 
 	@Override
@@ -530,7 +536,7 @@ public class WoolServerImpl implements Server {
 		Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 
         for (ServerConfigEntry entry : getHandle().getPlayerManager().getUserBanList().values()) {
-            result.add(getOfflinePlayer((GameProfile) entry.getName()));
+            // result.add(getOfflinePlayer((GameProfile) entry.getName())); TODO
         }
 
         return result;
@@ -547,7 +553,7 @@ public class WoolServerImpl implements Server {
 		Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 
         for (OperatorEntry entry : getHandle().getPlayerManager().getOpList().values()) {
-            result.add(getOfflinePlayer((GameProfile) entry.getName()));
+            //result.add(getOfflinePlayer((GameProfile) entry.getName())); TODO
         }
 
         return result;
@@ -812,8 +818,21 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public List<Entity> selectEntities(CommandSender sender, String selector) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		Preconditions.checkArgument(selector != null, "Selector cannot be null");
+        Preconditions.checkArgument(sender != null, "Sender cannot be null");
+
+        EntityArgumentType arg = EntityArgumentType.entities();
+        List<? extends net.minecraft.entity.Entity> nms;
+
+        try {
+            StringReader reader = new StringReader(selector);
+            nms = arg.parse(reader).getEntities(VanillaCommandWrapper.getListener(sender));
+            Preconditions.checkArgument(!reader.canRead(), "Spurious trailing data in selector: " + selector);
+        } catch (CommandSyntaxException ex) {
+            throw new IllegalArgumentException("Could not parse selector: " + selector, ex);
+        }
+
+        return new ArrayList<>(Lists.transform(nms, (entity) -> BukkitEntityAccess.getEntity(entity)));
 	}
 
 	@Override
@@ -824,7 +843,7 @@ public class WoolServerImpl implements Server {
 	
 	// IMPL Methods
 	
-	private MinecraftServer getHandle() {
+	MinecraftServer getHandle() {
 		return handle;
 	}
 
