@@ -20,7 +20,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 public class String2TextUtil {
-	/*
+	
 	private static final Pattern LINK_PATTERN = Pattern.compile("((?:(?:https?):\\/\\/)?(?:[-\\w_\\.]{2,}\\.[a-z]{2,4}.*?(?=[\\.\\?!,;:]?(?:[" + String.valueOf(org.bukkit.ChatColor.COLOR_CHAR) + " \\n]|$))))");
     private static final Map<Character, Formatting> formatMap;
 
@@ -37,7 +37,7 @@ public class String2TextUtil {
     }
 
     public static ChatColor getColor(Formatting format) {
-        return ChatColor.getByChar(((FormattingAccess) format).getCode());
+        return ChatColor.getByChar(((FormattingAccess) (Object) format).getCode());
     }
 
     private static class StringMessage {
@@ -126,7 +126,7 @@ public class String2TextUtil {
             }
             Text addition = new LiteralText(message.substring(currentIndex, index)).setStyle(style);
             currentIndex = index;
-            style = style.clone();
+            style = style.deepCopy();
             if (currentText == null) {
                 currentText = new LiteralText("");
                 list.add(currentText);
@@ -193,7 +193,7 @@ public class String2TextUtil {
             if (modi.isObfuscated()) {
                 out.append(Formatting.OBFUSCATED);
             }
-            out.append(c.getText());
+            out.append(c.asFormattedString());
         }
         return out.toString().replaceFirst("^(" + defaultColor + ")*", "");
     }
@@ -206,7 +206,7 @@ public class String2TextUtil {
     private static Text fixComponent(Text component, Matcher matcher) {
         if (component instanceof LiteralText) {
             LiteralText text = ((LiteralText) component);
-            String msg = text.getText();
+            String msg = text.asFormattedString();
             if (matcher.reset(msg).find()) {
                 matcher.reset();
 
@@ -228,7 +228,7 @@ public class String2TextUtil {
                     extras.add(prev);
 
                     LiteralText link = new LiteralText(matcher.group());
-                    Style linkModi = modifier.clone();
+                    Style linkModi = modifier.deepCopy();
                     linkModi.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, match));
                     link.setStyle(linkModi);
                     extras.add(link);
@@ -250,18 +250,18 @@ public class String2TextUtil {
         List extras = component.getSiblings();
         for (int i = 0; i < extras.size(); i++) {
             Text comp = (Text) extras.get(i);
-            if (comp.getStyle() != null && comp.getStyle().h() == null) {
+            if (comp.getStyle() != null && comp.getStyle().getClickEvent() == null) {
                 extras.set(i, fixComponent(comp, matcher));
             }
         }
 
         if (component instanceof TranslatableText) {
-            Object[] subs = ((TranslatableText) component).l();
+            Object[] subs = ((TranslatableText) component).getArgs();
             for (int i = 0; i < subs.length; i++) {
                 Object comp = subs[i];
                 if (comp instanceof Text) {
                     Text c = (Text) comp;
-                    if (c.getStyle() != null && c.getStyle().h() == null) {
+                    if (c.getStyle() != null && c.getStyle().getClickEvent() == null) {
                         subs[i] = fixComponent(c, matcher);
                     }
                 } else if (comp instanceof String && matcher.reset((String)comp).find()) {
@@ -275,5 +275,5 @@ public class String2TextUtil {
 
     private String2TextUtil() {
     }
-    */
+    
 }

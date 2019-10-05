@@ -422,7 +422,7 @@ public class WoolServerImpl implements Server {
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
 		return false;
-		// return getHandle().getCommandManager().execute(serverCommandSource_1, string_1); // TODO finish
+		//return getHandle().getCommandManager().execute(serverCommandSource_1, string_1); // TODO finish
 	}
 
 	@Override
@@ -826,7 +826,7 @@ public class WoolServerImpl implements Server {
 
         try {
             StringReader reader = new StringReader(selector);
-            nms = arg.parse(reader).getEntities(VanillaCommandWrapper.getListener(sender));
+            nms = arg.parse(reader).getEntities(WoolCommandWrapper.getSource(sender));
             Preconditions.checkArgument(!reader.canRead(), "Spurious trailing data in selector: " + selector);
         } catch (CommandSyntaxException ex) {
             throw new IllegalArgumentException("Could not parse selector: " + selector, ex);

@@ -8,19 +8,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.CommandMinecart;
 
 import io.github.woolmc.wool.Wool;
+import io.github.woolmc.wool.command.sender.ProxiedNativeCommandSender;
 import io.github.woolmc.wool.command.sender.WoolCommandBlockSender;
 import io.github.woolmc.wool.server.entity.WoolCommandMinecart;
 import io.github.woolmc.wool.server.player.WoolServerPlayer;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class WoolCommandWrapper {
-	public static ServerCommandSource getListener(CommandSender sender) {
+	public static ServerCommandSource getSource(CommandSender sender) {
 		if (sender instanceof Player) {
 			return ((WoolServerPlayer) sender).getHandle().getCommandSource();
 		}
+		
 		if (sender instanceof BlockCommandSender) {
 			return ((WoolCommandBlockSender) sender).getHandle().getCommandExecutor().getSource();
 		}
+		
 		if (sender instanceof CommandMinecart) {
 			return ((WoolCommandMinecart) sender).getHandle().getCommandSource();
 		}
@@ -29,12 +32,12 @@ public class WoolCommandWrapper {
 			if (sender instanceof ConsoleCommandSender) {
 				return ((WoolServerImpl) sender.getServer()).getHandle().getCommandSource();
 			}
-			if (sender instanceof ProxiedCommandSender) {
-				return ((ProxiedNativeCommandSender) sender).getHandle();
-			}
-
-			throw new IllegalArgumentException("Cannot make " + sender + " a ServerCommandSource");
+		}
+		
+		if (sender instanceof ProxiedCommandSender) {
+			return ((ProxiedNativeCommandSender) sender).getHandle();
 		}
 
+		throw new IllegalArgumentException("Cannot make " + sender + " a ServerCommandSource");
 	}
 }

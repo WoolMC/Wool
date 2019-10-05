@@ -23,6 +23,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
+import io.github.woolmc.wool.String2TextUtil;
 import net.minecraft.entity.Entity;
 
 public abstract class WoolEntity implements org.bukkit.entity.Entity {
@@ -174,14 +175,13 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public String getCustomName() {
-		return null;
-		// return getHandle().getCustomName(); // TODO Convert to text
+		return String2TextUtil.fromComponent(getHandle().getCustomName());
 	}
 
 
 	@Override
 	public void setCustomName(String name) {
-		// getHandle().setCustomName(text_1); // TODO Conver to text
+		getHandle().setCustomName(String2TextUtil.fromStringOrNull(name));
 	}
 
 
