@@ -24,8 +24,11 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import io.github.woolmc.wool.BukkitServerAccess;
+import io.github.woolmc.wool.BukkitWorldAccess;
 import io.github.woolmc.wool.String2TextUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.projectile.ArrowEntity;
+import net.minecraft.util.BlockRotation;
 
 public abstract class WoolEntity implements org.bukkit.entity.Entity {
 	
@@ -68,13 +71,13 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public void sendMessage(String message) {
-		// getHandle().sendMessage(text_1); // TODO Convert to text
+		getHandle().sendMessage(String2TextUtil.fromStringOrNull(message));
 	}
 
 
 	@Override
 	public void sendMessage(String[] messages) {
-		// getHandle().sendMessage(text_1); // TODO Convert to text
+		getHandle().sendMessage(String2TextUtil.fromStringOrNull(new StringBuilder().append(messages).toString()));
 	}
 
 
@@ -236,29 +239,28 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public BoundingBox getBoundingBox() {
-		// TODO Auto-generated method stub
-		return null;
+		return new BoundingBox();
 	}
 
 
 	@Override
 	public boolean isOnGround() {
-		// TODO Auto-generated method stub
-		return false;
+		if (getHandle() instanceof ArrowEntity) {
+            return ((ArrowEntity) getHandle()).onGround;
+        }
+        return getHandle().onGround;
 	}
 
 
 	@Override
 	public World getWorld() {
-		// TODO Auto-generated method stub
-		return null;
+		return BukkitWorldAccess.getWorld(getHandle().getEntityWorld());
 	}
 
 
 	@Override
 	public void setRotation(float yaw, float pitch) {
-		// TODO Auto-generated method stub
-		
+		getHandle(); // TODO set rotation
 	}
 
 
@@ -325,8 +327,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
-		
+		getHandle().remove();
 	}
 
 
@@ -365,8 +366,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public org.bukkit.entity.Entity getPassenger() {
-		// TODO Auto-generated method stub
-		return null;
+		return BukkitEntityAccess.getEntity(getHandle().getPrimaryPassenger());
 	}
 
 
@@ -379,8 +379,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public List<org.bukkit.entity.Entity> getPassengers() {
-		// TODO Auto-generated method stub
-		return null;
+		return BukkitEntityAccess.getEntity(getHandle().getPassengerList());
 	}
 
 
@@ -469,8 +468,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean isInsideVehicle() {
-		// TODO Auto-generated method stub
-		return false;
+		return getHandle().hasVehicle();
 	}
 
 
@@ -483,8 +481,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public org.bukkit.entity.Entity getVehicle() {
-		// TODO Auto-generated method stub
-		return null;
+		return BukkitEntityAccess.getEntity(getHandle().getVehicle());
 	}
 
 

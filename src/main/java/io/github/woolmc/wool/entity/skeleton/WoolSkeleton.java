@@ -10,19 +10,16 @@ public class WoolSkeleton extends WoolMob implements Skeleton {
 
 	public WoolSkeleton(SkeletonEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public SkeletonType getSkeletonType() {
-		// TODO Auto-generated method stub
-		return null;
+		return SkeletonType.NORMAL;
 	}
 
 	@Override
 	public void setSkeletonType(SkeletonType type) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Not supported.");
 	}
 
 	@Override
