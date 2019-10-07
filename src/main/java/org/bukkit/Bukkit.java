@@ -56,7 +56,7 @@ import com.google.common.collect.ImmutableList;
 import io.github.woolmc.wool.Wool;
 
 /**
- * Represents the Bukkit core, for version and Server singleton handling
+ * Represents the Bukkit core, for version and Server singleton handling, modified to work on the client.
  */
 public final class Bukkit {
     private static Server server;

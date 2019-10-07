@@ -1,11 +1,9 @@
 {
   "required": true,
-  "package": "io.github.woolmc.mixin.entity",
+  "package": "io.github.woolmc.wool.mixin.entity",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-  ],
-  "client": [
-    "MixinItemEntity",
+  	"MixinItemEntity",
     "hostile.MixinDrownedEntity",
     "hostile.MixinHuskEntity",
     "hostile.MixinSkeletonEntity",
@@ -14,7 +12,10 @@
     "hostile.MixinStrayEntity",
     "hostile.MixinCreeperEntity",
     "hostile.MixinBlazeEntity",
-    "hostile.MixinZombieVillagerEntity"
+    "hostile.MixinZombieVillagerEntity",
+    "player.MixinServerPlayerEntity"
+  ],
+  "client": [
   ],
   "injectors": {
     "defaultRequire": 1

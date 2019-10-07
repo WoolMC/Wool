@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import io.github.woolmc.wool.BukkitServerAccess;
 import io.github.woolmc.wool.Wool;
-import io.github.woolmc.wool.server.BukkitServerAccess;
 import net.minecraft.server.integrated.IntegratedServer;
 
 @Mixin(IntegratedServer.class)

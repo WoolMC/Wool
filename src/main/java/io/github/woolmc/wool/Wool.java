@@ -2,7 +2,6 @@ package io.github.woolmc.wool;
 
 import org.bukkit.Server;
 
-import io.github.woolmc.wool.server.WoolServerImpl;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
@@ -27,10 +26,6 @@ public final class Wool {
 	}
 	
 	public void setServer(Server bukkitServerInst) {
-		
-		if(this.server !=null) {
-			
-		}
 		this.server = bukkitServerInst;
 	}
 

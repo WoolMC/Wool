@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import io.github.woolmc.wool.server.WoolServerImpl;
+import io.github.woolmc.wool.WoolServerImpl;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
 
