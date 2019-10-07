@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import java.util.WeakHashMap;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
@@ -75,30 +74,31 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.github.woolmc.wool.Wool;
 import io.github.woolmc.wool.WoolConstants;
 import io.github.woolmc.wool.mixin.entity.BukkitEntityAccess;
-import io.github.woolmc.wool.server.player.WoolServerPlayer;
+import io.github.woolmc.wool.server.player.BukkitPlayerAccess;
 import net.minecraft.command.arguments.EntityArgumentType;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.potion.Potions;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.OperatorEntry;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.ServerConfigEntry;
 
 public class WoolServerImpl implements Server {
 	
-	private final MinecraftServer handle;
+	private final MinecraftServer nmsServer;
 	private final Logger logger = Logger.getLogger("Wool");
-	private WeakHashMap<UUID, WoolServerPlayer> players;
 	
 	private final ServicesManager servicesManager = new SimpleServicesManager();
 	// private final SimpleHelpMap helpMap = new SimpleHelpMap(this); // CB TODO
     private final StandardMessenger messenger = new StandardMessenger();
+	private PlayerManager playerManager;
 	// private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap); TODO
 	
-	
-	
-	public WoolServerImpl(MinecraftServer handle) {
-		this.handle = handle;
+	public WoolServerImpl(MinecraftServer handle, PlayerManager playerManager) {
+		this.nmsServer = handle;
+		this.playerManager = playerManager;
 		
+		System.out.println("Starting Wool Server");
 		Wool.getInstance().setServer(this);
 		Bukkit.setServer(this); // Not client friendly
 		// Register all the Enchantments and PotionTypes now so we can stop new registration immediately after
@@ -109,9 +109,6 @@ public class WoolServerImpl implements Server {
         Potions.HARMING.getClass();
         PotionEffectType.stopAcceptingRegistrations();
         // Ugly hack :(
-        
-        
-        
 	}
 	
 	@Override
@@ -142,7 +139,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
-		return players.values();
+		return Lists.transform(playerManager.getPlayerList(), (nms -> BukkitPlayerAccess.getBukkitPlayer(nms)));
 	}
 
 	@Override
@@ -195,7 +192,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public void setWhitelist(boolean newValue) {
-        getHandle().getPlayerManager().setWhitelistEnabled(newValue);
+        playerManager.setWhitelistEnabled(newValue);
 		getHandle().setWhitelistEnabled(newValue);
 
 	}
@@ -273,11 +270,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Player getPlayerExact(String name) {
-		for (Player player : players.values()) {
-			if(player.getName().equals(name)) {
-				return player;
-			}
-		}
+		// TODO
 		return null;
 	}
 
@@ -308,7 +301,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Player getPlayer(UUID id) {
-		return players.get(id);
+		return BukkitPlayerAccess.getBukkitPlayer(playerManager.getPlayer(id));
 	}
 
 	@Override
@@ -325,8 +318,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public ServicesManager getServicesManager() {
-		// TODO Auto-generated method stub
-		return null;
+		return servicesManager;
 	}
 
 	@Override
@@ -404,7 +396,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Logger getLogger() {
-		return logger ;
+		return logger;
 	}
 
 	@Override
@@ -843,8 +835,8 @@ public class WoolServerImpl implements Server {
 	
 	// IMPL Methods
 	
-	MinecraftServer getHandle() {
-		return handle;
+	public MinecraftServer getHandle() {
+		return nmsServer;
 	}
 
 }

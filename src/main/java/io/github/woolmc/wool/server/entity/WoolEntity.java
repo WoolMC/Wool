@@ -24,6 +24,7 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
 import io.github.woolmc.wool.String2TextUtil;
+import io.github.woolmc.wool.server.BukkitServerAccess;
 import net.minecraft.entity.Entity;
 
 public abstract class WoolEntity implements org.bukkit.entity.Entity {
@@ -344,8 +345,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public Server getServer() {
-		// TODO Auto-generated method stub
-		return null;
+		return BukkitServerAccess.getServer(handle.getServer());
 	}
 
 

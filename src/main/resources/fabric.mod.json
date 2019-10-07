@@ -4,13 +4,13 @@
   "version": "${version}",
 
   "name": "Wool",
-  "description": "A Fabric mod which adds support for some bukkit plugins",
+  "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
   ],
   "contact": {
-    "homepage": "https://github.com/WoolMC/",
-    "sources": "https://github.com/WoolMC/"
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
   "license": "CC0-1.0",
@@ -18,14 +18,14 @@
 
   "environment": "*",
   "entrypoints": {
-    "server": [
-      "io.github.woolmc.wool.WoolServerMod"
+    "main": [
+      "io.github.woolmc.WoolMod"
     ]
   },
   "mixins": [
     "server.mixins.json",
-    "events.mixins.json",
-    "entities.mixins.json"
+    "client.mixins.json",
+    "common.mixins.json"
   ],
 
   "depends": {

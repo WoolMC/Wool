@@ -2,10 +2,9 @@
   "required": true,
   "package": "io.github.woolmc.wool.mixin.server",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  	"MixinMinecraftServer$Brand"
-  ],
-  "client": [
+  "server": [
+	"MixinMinecraftDedicatedServer",
+	"MixinMinecraftDedicatedServer$RCONCommandSource"
   ],
   "injectors": {
     "defaultRequire": 1
