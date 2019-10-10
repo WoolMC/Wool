@@ -3,7 +3,8 @@
   "package": "io.github.woolmc.wool.mixin.common",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-  	"MixinPlayerManager"
+  	"MixinPlayerManager",
+    "ServerWorldAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

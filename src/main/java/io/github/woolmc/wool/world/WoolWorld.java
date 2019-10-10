@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import io.github.woolmc.wool.mixin.common.ServerWorldAccessor;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -345,7 +346,7 @@ public class WoolWorld implements World {
 	public List<Entity> getEntities() {
 		List<Entity> list = new ArrayList<Entity>();
 
-        for (Object o : getHandle().entitiesById.values()) { // TODO accessor
+        for (Object o : ((ServerWorldAccessor)getHandle()).getEntitiesById().values()) { // TODO accessor
             if (o instanceof net.minecraft.entity.Entity) {
             	net.minecraft.entity.Entity mcEnt = (net.minecraft.entity.Entity) o;
                 Entity bukkitEntity = BukkitEntityAccess.getEntity(mcEnt);
@@ -364,7 +365,7 @@ public class WoolWorld implements World {
 	public List<LivingEntity> getLivingEntities() {
 		List<LivingEntity> list = new ArrayList<LivingEntity>();
 
-        for (Object o : getHandle().entitiesById.values()) { // TODO accessor
+        for (Object o : ((ServerWorldAccessor)getHandle()).getEntitiesById().values()) { // TODO accessor
             if (o instanceof net.minecraft.entity.Entity) {
             	net.minecraft.entity.Entity mcEnt = (net.minecraft.entity.Entity) o;
                 Entity bukkitEntity = BukkitEntityAccess.getEntity(mcEnt);

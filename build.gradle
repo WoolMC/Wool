@@ -38,7 +38,6 @@ dependencies {
 	
 	// We implement the API to include bukkit. This jar is shadowed in at the end of build
 	compile "org.bukkit:bukkit:1.14.4-R0.1-SNAPSHOT"
-	
 }
 
 processResources {

@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "io.github.woolmc.wool.mixin.bukkit",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+	"MixinBukkit"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
