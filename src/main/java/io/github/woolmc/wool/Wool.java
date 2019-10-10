@@ -16,19 +16,23 @@ public final class Wool {
 	public static Wool getInstance() {
 		return instance;
 	}
-	
+
 	public WoolServerImpl getBukkitServer() {
 		return (WoolServerImpl) server;
 	}
-	
+
 	public MinecraftServer getNMSServer() {
 		return ((WoolServerImpl) server).getHandle();
 	}
-	
+
 	public void setServer(Server bukkitServerInst) {
 		this.server = bukkitServerInst;
 	}
 
+	/**
+	 * checks whether or not the mod is loaded on a client
+	 * @return
+	 */
 	public boolean isClient() {
 		return FabricLoader.getInstance().getEnvironmentType()==EnvType.CLIENT;
 	}
