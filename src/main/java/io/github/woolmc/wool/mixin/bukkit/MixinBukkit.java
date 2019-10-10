@@ -27,9 +27,9 @@ public class MixinBukkit {
 		if (server != null && !Wool.getInstance().isClient()) {
 			throw new UnsupportedOperationException("Can't redefine a singleton server");
 		}
-
 		server = param;
 		server.getLogger().info("This server is running " + getName() + " version " + getVersion() + " (Implementing API version " + getBukkitVersion() + ")");
+
 		info.cancel();
 	}
 }
