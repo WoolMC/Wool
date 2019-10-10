@@ -34,6 +34,6 @@ public final class Wool {
 	 * @return
 	 */
 	public boolean isClient() {
-		return FabricLoader.getInstance().getEnvironmentType()==EnvType.CLIENT;
+		return FabricLoader.getInstance().getEnvironmentType() != EnvType.SERVER;
 	}
 }
