@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.Validate;
@@ -38,10 +39,7 @@ import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.KeyedBossBar;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.PluginCommand;
+import org.bukkit.command.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -55,10 +53,9 @@ import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.loot.LootTable;
 import org.bukkit.map.MapView;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.SimpleServicesManager;
+import org.bukkit.permissions.Permission;
+import org.bukkit.plugin.*;
+import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffectType;
@@ -87,10 +84,15 @@ public class WoolServerImpl implements Server {
 	private final Logger logger = Logger.getLogger("Wool");
 	
 	private final ServicesManager servicesManager = new SimpleServicesManager();
+	private File update = new File("");
+	private UnsafeValues unsafe = new WoolUnsafeValues();
 	// private final SimpleHelpMap helpMap = new SimpleHelpMap(this); // CB TODO
+
     private final StandardMessenger messenger = new StandardMessenger();
 	private PlayerManager playerManager;
-	// private final SimplePluginManager pluginManager = new SimplePluginManager(this, commandMap); TODO
+	private final SimpleCommandMap simpleCommandMap = new SimpleCommandMap(this);
+	private final SimplePluginManager pluginManager = new SimplePluginManager(this, simpleCommandMap);
+
 	
 	public WoolServerImpl(MinecraftServer handle, PlayerManager playerManager) {
 		this.nmsServer = handle;
@@ -212,16 +214,17 @@ public class WoolServerImpl implements Server {
 		return 0; // TODO
 	}
 
+
 	@Override
 	public String getUpdateFolder() {
 		// TODO Auto-generated method stub
-		return null;
+		return update.toString();
 	}
 
 	@Override
 	public File getUpdateFolderFile() {
 		// TODO Auto-generated method stub
-		return null;
+		return update;
 	}
 
 	@Override
@@ -304,8 +307,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public PluginManager getPluginManager() {
-		// TODO Auto-generated method stub
-		return null;
+		return pluginManager;
 	}
 
 	@Override
@@ -827,14 +829,68 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public UnsafeValues getUnsafe() {
-		// TODO Auto-generated method stub
-		return null;
+		return unsafe;
 	}
 	
 	// IMPL Methods
 	
 	public MinecraftServer getHandle() {
 		return nmsServer;
+	}
+
+	public void enablePlugins(PluginLoadOrder type) {
+		Plugin[] plugins = pluginManager.getPlugins();
+
+		for (Plugin plugin : plugins) {
+			if ((!plugin.isEnabled()) && (plugin.getDescription().getLoad() == type)) {
+				enablePlugin(plugin);
+			}
+		}
+	}
+
+	private void enablePlugin(Plugin plugin) {
+		try {
+			List<Permission> perms = plugin.getDescription().getPermissions();
+
+			for (Permission perm : perms) {
+				try {
+					pluginManager.addPermission(perm, false);
+				} catch (IllegalArgumentException ex) {
+					getLogger().log(Level.WARNING, "Plugin " + plugin.getDescription().getFullName() + " tried to register permission '" + perm.getName() + "' but it's already registered", ex);
+				}
+			}
+			pluginManager.dirtyPermissibles();
+
+			pluginManager.enablePlugin(plugin);
+		} catch (Throwable ex) {
+			Logger.getLogger(WoolServerImpl.class.getName()).log(Level.SEVERE, ex.getMessage() + " loading " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+		}
+	}
+
+	public void loadPlugins() {
+		pluginManager.registerInterface(JavaPluginLoader.class);
+
+		File pluginFolder = new File("plugins");
+
+		if (pluginFolder.exists()) {
+			Plugin[] plugins = pluginManager.loadPlugins(pluginFolder);
+			for (Plugin plugin : plugins) {
+				try {
+					String message = String.format("Loading %s", plugin.getDescription().getFullName());
+					plugin.getLogger().info(message);
+					plugin.onLoad();
+				} catch (Throwable ex) {
+					Logger.getLogger(WoolServerImpl.class.getName()).log(Level.SEVERE, ex.getMessage() + " initializing " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+				}
+			}
+		} else {
+			pluginFolder.mkdir();
+		}
+	}
+
+
+	public void disablePlugins() {
+		pluginManager.disablePlugins();
 	}
 
 }

@@ -1,13 +1,13 @@
 package io.github.woolmc.wool;
 
-import org.bukkit.Server;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.decoration.AbstractDecorationEntity;
+import net.minecraft.entity.decoration.LeadKnotEntity;
 import net.minecraft.server.MinecraftServer;
+import org.bukkit.Server;
 
 public final class Wool {
-	
 	private static Wool instance = new Wool();
 	private Server server;
 	

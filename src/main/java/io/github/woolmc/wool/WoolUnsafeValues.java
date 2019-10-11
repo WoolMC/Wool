@@ -1,5 +1,7 @@
 package io.github.woolmc.wool;
 
+import io.github.woolmc.wool.util.Commodore;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.UnsafeValues;
@@ -9,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
+import java.util.logging.Level;
 
 public class WoolUnsafeValues implements UnsafeValues {
 
@@ -68,8 +71,13 @@ public class WoolUnsafeValues implements UnsafeValues {
 
 	@Override
 	public byte[] processClass(PluginDescriptionFile pdf, String path, byte[] clazz) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			clazz = Commodore.convert(clazz, pdf.getAPIVersion() != null);
+		} catch (Exception ex) {
+			Bukkit.getLogger().log(Level.SEVERE, "Fatal error trying to convert " + pdf.getFullName() + ":" + path, ex);
+		}
+
+		return clazz;
 	}
 
 	@Override

@@ -29,7 +29,6 @@ public class MixinBukkit {
 		}
 		server = param;
 		server.getLogger().info("This server is running " + getName() + " version " + getVersion() + " (Implementing API version " + getBukkitVersion() + ")");
-
 		info.cancel();
 	}
 }

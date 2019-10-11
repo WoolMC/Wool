@@ -1,6 +1,8 @@
 package io.github.woolmc.wool.mixin.client;
 
+import io.github.woolmc.wool.WoolServerImpl;
 import org.bukkit.Server;
+import org.bukkit.plugin.PluginLoadOrder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +17,9 @@ public class MixinIntegratedServer implements BukkitServerAccess {
 	
 	@Inject(method = "loadWorld(Ljava/lang/String;Ljava/lang/String;JLnet/minecraft/world/level/LevelGeneratorType;Lcom/google/gson/JsonElement;)V", at = @At(value = "HEAD"))
 	private void beforeWorldLoad(CallbackInfo ci) {
-		// TODO load plugins
+		Wool.getInstance().getBukkitServer().loadPlugins();
+		Wool.getInstance().getBukkitServer().enablePlugins(PluginLoadOrder.STARTUP);
+		Wool.getInstance().getBukkitServer().enablePlugins(PluginLoadOrder.POSTWORLD);
 		System.out.println("===Load plugins===");
 	}
 	
