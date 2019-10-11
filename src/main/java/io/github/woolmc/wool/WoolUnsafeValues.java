@@ -17,31 +17,26 @@ public class WoolUnsafeValues implements UnsafeValues {
 
 	@Override
 	public Material toLegacy(Material material) {
-		// TODO Auto-generated method stub
-		return null;
+		return Material.valueOf(Material.LEGACY_PREFIX+material.name());
 	}
 
 	@Override
 	public Material fromLegacy(Material material) {
-		// TODO Auto-generated method stub
-		return null;
+		return Material.valueOf(material.name().replaceAll(Material.LEGACY_PREFIX, ""));
 	}
 
 	@Override
 	public Material fromLegacy(MaterialData material) {
-		// TODO Auto-generated method stub
-		return null;
+		return material.getItemType();
 	}
 
 	@Override
 	public Material fromLegacy(MaterialData material, boolean itemPriority) {
-		// TODO Auto-generated method stub
-		return null;
+		return material.getItemType();
 	}
 
 	@Override
 	public BlockData fromLegacy(Material material, byte data) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

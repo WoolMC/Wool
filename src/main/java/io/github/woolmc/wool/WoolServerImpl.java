@@ -2,19 +2,14 @@ package io.github.woolmc.wool;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.io.IOException;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import io.github.woolmc.wool.config.WoolConfig;
+import io.github.woolmc.wool.scheduler.WoolScheduler;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
@@ -40,6 +35,8 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.*;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -92,6 +89,7 @@ public class WoolServerImpl implements Server {
 	private PlayerManager playerManager;
 	private final SimpleCommandMap simpleCommandMap = new SimpleCommandMap(this);
 	private final SimplePluginManager pluginManager = new SimplePluginManager(this, simpleCommandMap);
+	private final WoolScheduler scheduler = new WoolScheduler();
 
 	
 	public WoolServerImpl(MinecraftServer handle, PlayerManager playerManager) {
@@ -99,6 +97,7 @@ public class WoolServerImpl implements Server {
 		this.playerManager = playerManager;
 		
 		System.out.println("Starting Wool Server");
+
 		Wool.getInstance().setServer(this);
 		Bukkit.setServer(this); // Not client friendly
 		// Register all the Enchantments and PotionTypes now so we can stop new registration immediately after
@@ -312,8 +311,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public BukkitScheduler getScheduler() {
-		// TODO Auto-generated method stub
-		return null;
+		return scheduler;
 	}
 
 	@Override
@@ -324,7 +322,7 @@ public class WoolServerImpl implements Server {
 	@Override
 	public List<World> getWorlds() {
 		// TODO Auto-generated method stub
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	@Override
