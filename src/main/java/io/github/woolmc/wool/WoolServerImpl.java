@@ -235,7 +235,7 @@ public class WoolServerImpl implements Server {
 	@Override
 	public int getTicksPerAnimalSpawns() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 400;
 	}
 
 	@Override
@@ -271,14 +271,14 @@ public class WoolServerImpl implements Server {
 	@Override
 	public Player getPlayerExact(String name) {
 		// TODO
-		return null;
+		return null; //playerManager.getPlayer(name);
 	}
 
 	@Override
 	public List<Player> matchPlayer(String partialName) {
 		Validate.notNull(partialName, "PartialName cannot be null");
 
-        List<Player> matchedPlayers = new ArrayList<Player>();
+        List<Player> matchedPlayers = new ArrayList<>();
 
         for (Player iterPlayer : this.getOnlinePlayers()) {
             String iterPlayerName = iterPlayer.getName();

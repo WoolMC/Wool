@@ -7,6 +7,10 @@ import java.io.IOException;
 
 public class WoolConfig {
 	public int schedulerAsyncThreads = 1;
+	public long connectionThrottle = 1024;
+	public int ticksPerAnimalSpawn = 400;
+	public int ticksPerMobSpawn = 1;
+
 
 	public void load(File file) {
 		YamlConfiguration yml;
