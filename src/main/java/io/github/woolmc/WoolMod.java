@@ -3,14 +3,18 @@ package io.github.woolmc;
 import io.github.woolmc.wool.Wool;
 import io.github.woolmc.wool.config.SimpleConfig;
 import io.github.woolmc.wool.config.WoolConfig;
-import io.github.woolmc.wool.scheduler.WoolScheduler;
+import io.github.woolmc.wool.scheduler.WoolSchedulerImpl;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import java.io.File;
+import java.util.Objects;
 
 public class WoolMod implements ModInitializer {
+
+
 	private WoolConfig config;
 	private static WoolMod instance;
+	private static Thread mainThread;
 
 	@Override
 	public void onInitialize() {
@@ -20,7 +24,11 @@ public class WoolMod implements ModInitializer {
 		config.load(new File("wool.yml"));
 		Wool.getInstance(); // Initalize server
 		// Initialize scheduler ticking
-		WorldTickCallback.EVENT.register(s -> ((WoolScheduler)Wool.getInstance().getBukkitServer().getScheduler()).tick(s.getServer().getTicks()));
+		WorldTickCallback.EVENT.register(s -> {
+			((WoolSchedulerImpl)Wool.getInstance().getBukkitServer().getScheduler())
+				.tick(Objects.requireNonNull(s.getServer()).getTicks());
+			mainThread = Thread.currentThread(); // for verifying asyncness
+		});
 	}
 
 	public static WoolMod getInstance() {
@@ -31,7 +39,7 @@ public class WoolMod implements ModInitializer {
 		return getInstance().config;
 	}
 
-	public SimpleConfig getConfig() {
-		return config;
+	public static Thread getMainThread() {
+		return mainThread;
 	}
 }

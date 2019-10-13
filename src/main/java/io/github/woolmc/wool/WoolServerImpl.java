@@ -7,7 +7,12 @@ import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import io.github.woolmc.WoolMod;
+import io.github.woolmc.wool.player.WoolServerPlayer;
 import io.github.woolmc.wool.scheduler.WoolScheduler;
+import io.github.woolmc.wool.scheduler.WoolSchedulerImpl;
+import io.github.woolmc.wool.world.WoolWorld;
+import net.minecraft.world.dimension.DimensionType;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.BanList.Type;
@@ -52,7 +57,6 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
@@ -70,6 +74,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.OperatorEntry;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.ServerConfigEntry;
+import org.jetbrains.annotations.NotNull;
 
 public class WoolServerImpl implements Server {
 	
@@ -85,7 +90,7 @@ public class WoolServerImpl implements Server {
 	private PlayerManager playerManager;
 	private final SimpleCommandMap simpleCommandMap = new SimpleCommandMap(this);
 	private final SimplePluginManager pluginManager = new SimplePluginManager(this, simpleCommandMap);
-	private final WoolScheduler scheduler = new WoolScheduler();
+	private final WoolSchedulerImpl scheduler = new WoolSchedulerImpl();
 
 	
 	public WoolServerImpl(MinecraftServer handle, PlayerManager playerManager) {
@@ -108,13 +113,12 @@ public class WoolServerImpl implements Server {
 	
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return null;
+		
 	}
 
 	@Override
@@ -149,8 +153,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public int getViewDistance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getHandle().getPlayerManager().getViewDistance();
 	}
 
 	@Override
@@ -160,8 +163,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public String getWorldType() {
-		// TODO Auto-generated method stub
-		return null;
+		return getHandle().getWorld(DimensionType.OVERWORLD).getGeneratorType().getName().toUpperCase();
 	}
 
 	@Override
@@ -171,8 +173,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean getAllowEnd() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
@@ -194,50 +195,43 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void reloadWhitelist() {
-		// TODO Auto-generated method stub
-
+		getHandle().getPlayerManager().reloadWhitelist();
 	}
 
 	@Override
 	public int broadcastMessage(String message) {
-		return 0; // TODO
+		getHandle().sendMessage(String2TextUtil.fromStringOrNull(message));
 	}
 
 
 	@Override
 	public String getUpdateFolder() {
-		// TODO Auto-generated method stub
 		return update.toString();
 	}
 
 	@Override
 	public File getUpdateFolderFile() {
-		// TODO Auto-generated method stub
 		return update;
 	}
 
 	@Override
 	public long getConnectionThrottle() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns() {
-		// TODO Auto-generated method stub
-		return 400;
+		return WoolMod.getWoolConfig().ticksPerAnimalSpawn;
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns() {
-		// TODO Auto-generated method stub
-		return 0;
+		return WoolMod.getWoolConfig().ticksPerMobSpawn;
 	}
 
 	@Override
@@ -266,8 +260,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Player getPlayerExact(String name) {
-		// TODO
-		return null; //playerManager.getPlayer(name);
+		return new WoolServerPlayer(getHandle().getPlayerManager().getPlayer(name));
 	}
 
 	@Override
@@ -296,96 +289,99 @@ public class WoolServerImpl implements Server {
 	}
 
 	@Override
-	public Player getPlayer(UUID id) {
+	public Player getPlayer(@NotNull UUID id) {
 		return BukkitPlayerAccess.getBukkitPlayer(playerManager.getPlayer(id));
 	}
 
+	@NotNull
 	@Override
 	public PluginManager getPluginManager() {
 		return pluginManager;
 	}
 
+	@NotNull
 	@Override
-	public BukkitScheduler getScheduler() {
+	public WoolScheduler getScheduler() {
 		return scheduler;
 	}
 
+	@NotNull
 	@Override
 	public ServicesManager getServicesManager() {
 		return servicesManager;
 	}
 
+	@NotNull
 	@Override
 	public List<World> getWorlds() {
-		// TODO Auto-generated method stub
 		return Collections.EMPTY_LIST;
 	}
 
 	@Override
-	public World createWorld(WorldCreator creator) {
-		// TODO Auto-generated method stub
-		return null;
+	public World createWorld(@NotNull WorldCreator creator) {
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
-	public boolean unloadWorld(String name, boolean save) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean unloadWorld(@NotNull String name, boolean save) {
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
-	public boolean unloadWorld(World world, boolean save) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean unloadWorld(@NotNull World world, boolean save) {
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
-	public World getWorld(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public World getWorld(@NotNull String name) {
+		DimensionType type;
+		switch (name) {
+			case "world": type = DimensionType.OVERWORLD; break;
+			case "world_nether": type = DimensionType.THE_NETHER; break;
+			case "world_end": type = DimensionType.THE_END; break;
+			default: throw new UnsupportedOperationException(name+" custom worlds not supported");
+		}
+		return new WoolWorld(getHandle().getWorld(type));
 	}
 
 	@Override
-	public World getWorld(UUID uid) {
-		// TODO Auto-generated method stub
-		return null;
+	public World getWorld(@NotNull UUID uid) {
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public MapView getMap(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public MapView createMap(World world) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public ItemStack createExplorerMap(World world, Location location, StructureType structureType, int radius,
 			boolean findUnexplored) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void reload() {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void reloadData() {
-		// TODO Auto-generated method stub
-
+		getHandle().reload();
 	}
 
 	@Override
@@ -395,14 +391,12 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public PluginCommand getPluginCommand(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void savePlayers() {
-		// TODO Auto-generated method stub
-
+		getHandle().getPlayerManager().saveAllPlayerData();
 	}
 
 	@Override
@@ -413,49 +407,47 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean addRecipe(Recipe recipe) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
+		// TODO accessor on getHandle().getRecipeManager().recipeMap <- bukkit recipe
 	}
 
 	@Override
 	public List<Recipe> getRecipesFor(ItemStack result) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		// TODO accessor on getHandle().getRecipeManager().recipeMap -> Bukkit recipes and filter
 	}
 
 	@Override
 	public Iterator<Recipe> recipeIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		// TODO getHandle().getRecipeManager().values(); -> Bukkit Recipes
 	}
 
 	@Override
 	public void clearRecipes() {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
+		// TODO accessor on getHandle().getRecipeManager().recipeMap
 	}
 
 	@Override
 	public void resetRecipes() {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
+		// TODO accessor on getHandle().getRecipeManager().recipeMap
 	}
 
 	@Override
 	public Map<String, String[]> getCommandAliases() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public int getSpawnRadius() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getHandle().getSpawnRadius(getHandle().getWorld(DimensionType.OVERWORLD));
 	}
 
 	@Override
 	public void setSpawnRadius(int value) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 
@@ -466,8 +458,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public boolean getAllowFlight() {
-		// TODO Auto-generated method stub
-		return false;
+		return getHandle().isFlightEnabled();
 	}
 
 	@Override
@@ -482,20 +473,19 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public int broadcast(String message, String permission) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
@@ -521,7 +511,7 @@ public class WoolServerImpl implements Server {
 	public Set<OfflinePlayer> getBannedPlayers() {
 		Set<OfflinePlayer> result = new HashSet<OfflinePlayer>();
 
-        for (ServerConfigEntry entry : getHandle().getPlayerManager().getUserBanList().values()) {
+        for (ServerConfigEntry<com.mojang.authlib.GameProfile> entry : getHandle().getPlayerManager().getUserBanList().values()) {
             // result.add(getOfflinePlayer((GameProfile) entry.getName())); TODO
         }
 
@@ -530,8 +520,8 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public BanList getBanList(Type type) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
@@ -547,98 +537,93 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public void setDefaultGameMode(GameMode mode) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public ConsoleCommandSender getConsoleSender() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public File getWorldContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Messenger getMessenger() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public HelpMap getHelpMap() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type, String title) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Merchant createMerchant(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return WoolMod.getWoolConfig().hostileMobCap;
 	}
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return WoolMod.getWoolConfig().animalMobCap;
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return WoolMod.getWoolConfig().waterMobCap;
 	}
 
 	@Override
 	public int getAmbientSpawnLimit() {
-		// TODO Auto-generated method stub
-		return 0;
+		return WoolMod.getWoolConfig().ambientMobCap;
 	}
 
 	@Override
@@ -653,153 +638,150 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public String getShutdownMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public WarningState getWarningState() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public ItemFactory getItemFactory() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public ScoreboardManager getScoreboardManager() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public CachedServerIcon getServerIcon() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public CachedServerIcon loadServerIcon(File file) throws IllegalArgumentException, Exception {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public CachedServerIcon loadServerIcon(BufferedImage image) throws IllegalArgumentException, Exception {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public void setIdleTimeout(int threshold) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public int getIdleTimeout() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public ChunkData createChunkData(World world) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public BossBar createBossBar(String title, BarColor color, BarStyle style, BarFlag... flags) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public KeyedBossBar createBossBar(NamespacedKey key, String title, BarColor color, BarStyle style,
 			BarFlag... flags) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Iterator<KeyedBossBar> getBossBars() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public KeyedBossBar getBossBar(NamespacedKey key) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public boolean removeBossBar(NamespacedKey key) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Entity getEntity(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Advancement getAdvancement(NamespacedKey key) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public Iterator<Advancement> advancementIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public BlockData createBlockData(Material material) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public BlockData createBlockData(Material material, Consumer<BlockData> consumer) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public BlockData createBlockData(String data) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public BlockData createBlockData(Material material, String data) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public <T extends Keyed> Tag<T> getTag(String registry, NamespacedKey tag, Class<T> clazz) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public <T extends Keyed> Iterable<Tag<T>> getTags(String registry, Class<T> clazz) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
 	public LootTable getLootTable(NamespacedKey key) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
+		
 	}
 
 	@Override
