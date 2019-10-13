@@ -206,6 +206,7 @@ public class WoolServerImpl implements Server {
 	@Override
 	public int broadcastMessage(String message) {
 		getHandle().sendMessage(String2TextUtil.fromStringOrNull(message));
+		return 1;
 	}
 
 
