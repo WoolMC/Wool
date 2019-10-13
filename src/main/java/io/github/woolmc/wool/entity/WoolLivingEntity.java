@@ -397,7 +397,7 @@ public abstract class WoolLivingEntity extends WoolEntity implements LivingEntit
 	@Override
 	public abstract EntityType getType();
 	
-	private net.minecraft.entity.LivingEntity getHandle() {
+	public net.minecraft.entity.LivingEntity getHandle() {
 		return (net.minecraft.entity.LivingEntity) handle;
 	}
 

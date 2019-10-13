@@ -3,7 +3,7 @@
   "package": "io.github.woolmc.wool.mixin.server",
   "compatibilityLevel": "JAVA_8",
   "server": [
-	"MixinMinecraftDedicatedServer",
+	"MixinMinecraftServer",
 	"MixinMinecraftDedicatedServer$RCONCommandSource"
   ],
   "injectors": {

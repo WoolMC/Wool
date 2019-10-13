@@ -609,7 +609,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	// IMPL Methods
 	
-	private Entity getHandle() {
+	public Entity getHandle() {
 		return handle;
 	}
 	
