@@ -37,9 +37,6 @@ public class Sys {
 		return new Object[]{ste, name, thread.getName()};
 	}
 
-	/**
-	 * Initializes the logger
-	 */
 	static {
 		LOGGER.setLevel(Level.FINEST);
 		LOGGER.setUseParentHandlers(false);
@@ -76,7 +73,7 @@ public class Sys {
 	/**
 	 * Puts an error message on the consol with the stack trace
 	 *
-	 * @param info
+	 * @param info message
 	 */
 	public static void err(String info, Object...params) {
 		LOGGER.log(Level.SEVERE, String.format(info, params), params("ERROR"));
@@ -85,7 +82,7 @@ public class Sys {
 	/**
 	 * Puts a warn message on the console with the stack trace
 	 *
-	 * @param info
+	 * @param info the message
 	 */
 	public static void wrn(String info, Object...params) {
 		LOGGER.log(Level.WARNING, String.format(info, params), params("WARN"));
@@ -94,7 +91,7 @@ public class Sys {
 	/**
 	 * Puts an info message on the console with the stack trace
 	 *
-	 * @param info
+	 * @param info the message
 	 */
 	public static void inf(String info, Object...params) {
 		LOGGER.log(Level.INFO, String.format(info, params), params("INFO"));
@@ -103,7 +100,7 @@ public class Sys {
 	/**
 	 * Puts a debug message on the console with the stack trace
 	 *
-	 * @param info
+	 * @param info the message
 	 */
 	public static void dbg(String info, Object...params) {
 		LOGGER.log(Level.FINE, String.format(info, params), params("DEBUG"));
@@ -112,7 +109,7 @@ public class Sys {
 	/**
 	 * Puts a config message on the console with the stack trace
 	 *
-	 * @param info
+	 * @param info the message
 	 */
 	public static void cfg(String info, Object...params) {
 		LOGGER.log(Level.CONFIG, String.format(info, params), params("CONFIG"));
