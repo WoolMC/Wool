@@ -118,7 +118,7 @@ public class WoolServerImpl implements Server {
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		
+		throw new UnsupportedOperationException("unsupported");
 	}
 
 	@Override
