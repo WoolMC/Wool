@@ -27,8 +27,7 @@
     "client.mixins.json",
     "common.mixins.json",
     "entities.mixins.json",
-    "events.mixins.json",
-    "bukkit.mixins.json"
+    "events.mixins.json"
   ],
 
   "depends": {
