@@ -1,12 +1,11 @@
 package io.github.woolmc;
 
 import io.github.woolmc.wool.Wool;
+import io.github.woolmc.wool.config.SimpleConfig;
 import io.github.woolmc.wool.config.WoolConfig;
 import io.github.woolmc.wool.scheduler.WoolScheduler;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
-import org.bukkit.Bukkit;
 import java.io.File;
 
 public class WoolMod implements ModInitializer {
@@ -32,7 +31,7 @@ public class WoolMod implements ModInitializer {
 		return getInstance().config;
 	}
 
-	public WoolConfig getConfig() {
+	public SimpleConfig getConfig() {
 		return config;
 	}
 }

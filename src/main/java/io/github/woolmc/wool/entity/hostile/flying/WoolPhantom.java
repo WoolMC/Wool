@@ -28,7 +28,7 @@ public class WoolPhantom extends WoolFlyingEntity implements Phantom {
 		return EntityType.PHANTOM;
 	}
 
-	private PhantomEntity getHandle() {
+	public PhantomEntity getHandle() {
 		return (PhantomEntity) this.handle;
 	}
 	

@@ -42,7 +42,7 @@ public class WoolItem extends WoolEntity implements Item {
 		return EntityType.DROPPED_ITEM;
 	}
 	
-	private ItemEntity getHandle() {
+	public ItemEntity getHandle() {
 		return (ItemEntity) handle;
 	}
 

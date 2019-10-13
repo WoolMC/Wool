@@ -2,13 +2,11 @@ package io.github.woolmc.wool;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import io.github.woolmc.wool.config.WoolConfig;
 import io.github.woolmc.wool.scheduler.WoolScheduler;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
@@ -35,8 +33,6 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.command.*;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
