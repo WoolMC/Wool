@@ -1,5 +1,6 @@
 package io.github.woolmc.wool;
 
+import io.github.woolmc.WoolMod;
 import io.github.woolmc.wool.util.Commodore;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
+import java.util.List;
 import java.util.logging.Level;
 
 public class WoolUnsafeValues implements UnsafeValues {
@@ -55,9 +57,29 @@ public class WoolUnsafeValues implements UnsafeValues {
 		throw new UnsupportedOperationException("Unsupported");
 	}
 
+	private static final List<String> SUPPORTED_API = WoolMod.getWoolConfig().supported;
+
 	@Override
 	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException {
-		throw new UnsupportedOperationException("Unsupported");
+		int minimumIndex = SUPPORTED_API.indexOf(WoolMod.getWoolConfig().minimumAPI);
+
+		if (pdf.getAPIVersion() != null) {
+			int pluginIndex = SUPPORTED_API.indexOf(pdf.getAPIVersion());
+
+			if (pluginIndex == -1) {
+				throw new InvalidPluginException("Unsupported API version " + pdf.getAPIVersion());
+			}
+
+			if (pluginIndex < minimumIndex) {
+				throw new InvalidPluginException("Plugin API version " + pdf.getAPIVersion() + " is lower than the minimum allowed version. Please update or replace it.");
+			}
+		} else {
+			if (minimumIndex == -1) {
+				Bukkit.getLogger().log(Level.WARNING, "Plugin " + pdf.getFullName() + " does not specify an api-version.");
+			} else {
+				throw new InvalidPluginException("Plugin API version " + pdf.getAPIVersion() + " is lower than the minimum allowed version. Please update or replace it.");
+			}
+		}
 	}
 
 	@Override

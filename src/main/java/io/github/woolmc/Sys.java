@@ -1,6 +1,7 @@
 package io.github.woolmc;
 
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Handler;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
  */
 public class Sys {
 
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("hh:mm:ss");
 
 	/**
 	 * Utility class
@@ -30,8 +32,9 @@ public class Sys {
 	private static final Logger LOGGER = Logger.getLogger("WoolMC");
 
 	private static Object[] params(String name) {
-		StackTraceElement ste = Thread.currentThread().getStackTrace()[3];
-		return new Object[]{ste, name};
+		Thread thread = Thread.currentThread();
+		StackTraceElement ste = thread.getStackTrace()[3];
+		return new Object[]{ste, name, thread.getName()};
 	}
 
 	/**
@@ -52,6 +55,7 @@ public class Sys {
 				/* useless */
 			}
 
+
 			@Override
 			public void publish(LogRecord r) {
 				Level l = r.getLevel();
@@ -63,7 +67,7 @@ public class Sys {
 
 				Date date = Date.from(Instant.now());
 				Object[] parameters = r.getParameters();
-				stream.printf("[ %s ] as %s\n%s: \"%s\"\n", parameters[0], parameters[1], date, r.getMessage());
+				stream.printf("[ %s ]\n[%s] [%s/%s]: \"%s\"\n", parameters[0], DATE_FORMAT.format(date), parameters[2], parameters[1], r.getMessage());
 			}
 		});
 

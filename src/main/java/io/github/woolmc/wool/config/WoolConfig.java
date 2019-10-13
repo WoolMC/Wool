@@ -1,5 +1,8 @@
 package io.github.woolmc.wool.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class WoolConfig implements SimpleConfig {
 	@YamlPath(path = "scheduler.asyncThreads")
 	public int schedulerAsyncThreads = 1;
@@ -20,5 +23,9 @@ public class WoolConfig implements SimpleConfig {
 	@YamlPath(path = "mobcap.ambient")
 	public int ambientMobCap = 15; // TODO implement
 
+	@YamlPath(path = "version.minimumapi")
+	public String minimumAPI = "1.13";
+	@YamlPath(path = "version.supported")
+	public List<String> supported = Arrays.asList("1.13", "1.14");
 
 }
