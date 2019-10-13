@@ -1,5 +1,8 @@
 package io.github.woolmc;
 
+import java.io.PrintStream;
+import java.time.Instant;
+import java.util.Date;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -19,16 +22,16 @@ public class Sys {
 	private Sys() {
 		Sys.dbg("Debug");
 		Sys.err("Error");
-		Sys.gud("Relief");
+		Sys.cfg("Relief");
 		Sys.inf("Info");
 		Sys.wrn("Warn");
 	}
 
 	private static final Logger LOGGER = Logger.getLogger("WoolMC");
 
-	private static Object[] params() {
+	private static Object[] params(String name) {
 		StackTraceElement ste = Thread.currentThread().getStackTrace()[3];
-		return new Object[]{ste.getFileName(), ste.getLineNumber()};
+		return new Object[]{ste, name};
 	}
 
 	/**
@@ -41,21 +44,26 @@ public class Sys {
 
 			@Override
 			public void close() {
-				/* dunno what this does */
+				/* useless */
 			}
 
 			@Override
 			public void flush() {
-				/* dunno what this does */
+				/* useless */
 			}
 
 			@Override
 			public void publish(LogRecord r) {
 				Level l = r.getLevel();
-				if (l.intValue() != Level.SEVERE.intValue())
-					System.out.printf("(%s:%d) -> %s : %s\n", r.getParameters()[0], (Integer) r.getParameters()[1], l.toString(), r.getMessage());
+				PrintStream stream;
+				if (l.intValue() >= Level.WARNING.intValue())
+					stream = System.err;
 				else
-					System.err.printf("(%s:%d) -> %s : %s\n", r.getParameters()[0], (Integer) r.getParameters()[1], l.toString(), r.getMessage());
+					stream = System.out;
+
+				Date date = Date.from(Instant.now());
+				Object[] parameters = r.getParameters();
+				stream.printf("[ %s ] as %s\n%s: \"%s\"\n", parameters[0], parameters[1], date, r.getMessage());
 			}
 		});
 
@@ -67,43 +75,43 @@ public class Sys {
 	 * @param info
 	 */
 	public static void err(String info, Object...params) {
-		LOGGER.log(Level.SEVERE, String.format(info, params), params());
+		LOGGER.log(Level.SEVERE, String.format(info, params), params("ERROR"));
 	}
 
 	/**
-	 * Puts an warn message on the consol with the stack trace
+	 * Puts a warn message on the console with the stack trace
 	 *
 	 * @param info
 	 */
 	public static void wrn(String info, Object...params) {
-		LOGGER.log(Level.WARNING, String.format(info, params), params());
+		LOGGER.log(Level.WARNING, String.format(info, params), params("WARN"));
 	}
 
 	/**
-	 * Puts an info message on the consol with the stack trace
+	 * Puts an info message on the console with the stack trace
 	 *
 	 * @param info
 	 */
 	public static void inf(String info, Object...params) {
-		LOGGER.log(Level.INFO, String.format(info, params), params());
+		LOGGER.log(Level.INFO, String.format(info, params), params("INFO"));
 	}
 
 	/**
-	 * Puts an debug message on the consol with the stack trace
+	 * Puts a debug message on the console with the stack trace
 	 *
 	 * @param info
 	 */
 	public static void dbg(String info, Object...params) {
-		LOGGER.log(Level.CONFIG, String.format(info, params), params());
+		LOGGER.log(Level.FINE, String.format(info, params), params("DEBUG"));
 	}
 
 	/**
-	 * Puts an relief message on the consol with the stack trace
+	 * Puts a config message on the console with the stack trace
 	 *
 	 * @param info
 	 */
-	public static void gud(String info, Object...params) {
-		LOGGER.log(Level.FINE, String.format(info, params), params());
+	public static void cfg(String info, Object...params) {
+		LOGGER.log(Level.CONFIG, String.format(info, params), params("CONFIG"));
 	}
 
 }

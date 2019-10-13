@@ -19,6 +19,7 @@ public class WoolMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Sys.dbg("Hello!");
+
 		instance = this;
 		config = new WoolConfig();
 		config.load(new File("wool.yml"));

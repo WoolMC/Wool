@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface YamlPath {
 	String path();
+	String error() default "none";
 }

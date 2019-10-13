@@ -190,7 +190,6 @@ public class WoolServerImpl implements Server {
 	public void setWhitelist(boolean newValue) {
         playerManager.setWhitelistEnabled(newValue);
 		getHandle().setWhitelistEnabled(newValue);
-
 	}
 
 	@Override
@@ -342,19 +341,17 @@ public class WoolServerImpl implements Server {
 			case "world_end": type = DimensionType.THE_END; break;
 			default: throw new UnsupportedOperationException(name+" custom worlds not supported");
 		}
-		return new WoolWorld(getHandle().getWorld(type));
+		return BukkitWorldAccess.getWorld(getHandle().getWorld(type));
 	}
 
 	@Override
 	public World getWorld(@NotNull UUID uid) {
 		throw new UnsupportedOperationException("Unsupported");
-		
 	}
 
 	@Override
 	public MapView getMap(int id) {
 		throw new UnsupportedOperationException("Unsupported");
-		
 	}
 
 	@Override
@@ -449,7 +446,6 @@ public class WoolServerImpl implements Server {
 	@Override
 	public void setSpawnRadius(int value) {
 		throw new UnsupportedOperationException("Unsupported");
-
 	}
 
 	@Override
@@ -497,14 +493,12 @@ public class WoolServerImpl implements Server {
 	@Override
 	public void banIP(String address) {
         Validate.notNull(address, "Address cannot be null.");
-        
 		this.getBanList(org.bukkit.BanList.Type.IP).addBan(address, null, null, null);
 	}
 
 	@Override
 	public void unbanIP(String address) {
         Validate.notNull(address, "Address cannot be null.");
-
         this.getBanList(org.bukkit.BanList.Type.IP).pardon(address);
 	}
 
@@ -539,7 +533,6 @@ public class WoolServerImpl implements Server {
 	@Override
 	public GameMode getDefaultGameMode() {
 		throw new UnsupportedOperationException("Unsupported");
-		
 	}
 
 	@Override
@@ -556,13 +549,11 @@ public class WoolServerImpl implements Server {
 	@Override
 	public File getWorldContainer() {
 		throw new UnsupportedOperationException("Unsupported");
-		
 	}
 
 	@Override
 	public OfflinePlayer[] getOfflinePlayers() {
 		throw new UnsupportedOperationException("Unsupported");
-		
 	}
 
 	@Override

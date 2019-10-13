@@ -1,11 +1,14 @@
 package io.github.woolmc.wool.config;
 
+import io.github.woolmc.Sys;
+import io.github.woolmc.wool.String2TextUtil;
 import io.github.woolmc.wool.functions.TBiConsumer;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Optional;
 
 public interface SimpleConfig {
@@ -48,6 +51,12 @@ public interface SimpleConfig {
 		Field[] getFields = instance.getClass().getFields();
 		for (Field field : getFields)
 			Optional.ofNullable(field.getAnnotation(YamlPath.class))
-				.ifPresent(y -> iterator.accept(field, y.path()));
+				.ifPresent(y -> {
+					String error = y.error();
+					if(error.equals("none"))
+						iterator.accept(field, y.path());
+					else
+						Sys.wrn("%s is not supported!", error);
+				});
 	}
 }
