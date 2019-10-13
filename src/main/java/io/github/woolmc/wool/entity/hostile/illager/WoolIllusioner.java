@@ -5,11 +5,10 @@ import org.bukkit.entity.Illusioner;
 
 import net.minecraft.entity.mob.IllusionerEntity;
 
-public class WoolIllusioner extends WoolSpellcaster implements Illusioner {
+public class WoolIllusioner extends WoolSpellcaster<IllusionerEntity> implements Illusioner {
 
 	protected WoolIllusioner(IllusionerEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

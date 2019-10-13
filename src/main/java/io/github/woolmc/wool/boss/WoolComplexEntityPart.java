@@ -10,13 +10,11 @@ public abstract class WoolComplexEntityPart extends WoolEntity implements Comple
 
 	protected WoolComplexEntityPart(Entity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ComplexLivingEntity getParent() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 }

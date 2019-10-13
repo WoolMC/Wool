@@ -6,11 +6,10 @@ import org.bukkit.entity.EntityType;
 import io.github.woolmc.wool.entity.WoolMob;
 import net.minecraft.entity.mob.BlazeEntity;
 
-public class WoolBlaze extends WoolMob implements Blaze {
+public class WoolBlaze extends WoolMob<BlazeEntity> implements Blaze {
 
 	public WoolBlaze(BlazeEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

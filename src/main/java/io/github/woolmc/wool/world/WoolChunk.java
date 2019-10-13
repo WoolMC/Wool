@@ -40,26 +40,22 @@ public class WoolChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public ChunkSnapshot getChunkSnapshot() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Entity[] getEntities() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
@@ -70,68 +66,58 @@ public class WoolChunk implements Chunk {
 
 	@Override
 	public boolean isLoaded() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean load(boolean generate) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean load() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean unload(boolean save) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean unload() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isSlimeChunk() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isForceLoaded() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setForceLoaded(boolean forced) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public boolean addPluginChunkTicket(Plugin plugin) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean removePluginChunkTicket(Plugin plugin) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Collection<Plugin> getPluginChunkTickets() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
@@ -146,8 +132,7 @@ public class WoolChunk implements Chunk {
 
 	@Override
 	public boolean contains(BlockData block) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 	
 	public net.minecraft.world.chunk.WorldChunk getHandle() {

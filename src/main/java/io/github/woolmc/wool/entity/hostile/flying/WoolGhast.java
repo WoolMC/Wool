@@ -5,11 +5,10 @@ import org.bukkit.entity.Ghast;
 
 import net.minecraft.entity.mob.GhastEntity;
 
-public class WoolGhast extends WoolFlyingEntity implements Ghast {
+public class WoolGhast extends WoolFlyingEntity<GhastEntity> implements Ghast {
 
 	protected WoolGhast(GhastEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

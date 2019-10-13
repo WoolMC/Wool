@@ -4,11 +4,10 @@ import org.bukkit.entity.Vehicle;
 
 import net.minecraft.entity.Entity;
 
-public abstract class WoolVehicle extends WoolEntity implements Vehicle {
+public abstract class WoolVehicle<T extends Entity> extends WoolEntity<T> implements Vehicle {
 
-	protected WoolVehicle(Entity handle) {
+	protected WoolVehicle(T handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -1,49 +1,47 @@
 package io.github.woolmc.wool.entity;
 
+import net.minecraft.entity.LivingEntity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Mob;
 import org.bukkit.loot.LootTable;
 
-public abstract class WoolMob extends WoolLivingEntity implements Mob {
+public abstract class WoolMob<T extends LivingEntity> extends WoolLivingEntity<T> implements Mob {
 
-	protected WoolMob(net.minecraft.entity.LivingEntity handle) {
+	protected WoolMob(T handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void setLootTable(LootTable table) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public LootTable getLootTable() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setSeed(long seed) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public long getSeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setTarget(org.bukkit.entity.LivingEntity target) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public org.bukkit.entity.LivingEntity getTarget() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 }

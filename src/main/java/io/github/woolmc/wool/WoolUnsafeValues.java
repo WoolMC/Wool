@@ -42,26 +42,22 @@ public class WoolUnsafeValues implements UnsafeValues {
 
 	@Override
 	public Material getMaterial(String material, int version) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public int getDataVersion() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public ItemStack modifyItemStack(ItemStack stack, String arguments) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void checkSupported(PluginDescriptionFile pdf) throws InvalidPluginException {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
@@ -77,14 +73,12 @@ public class WoolUnsafeValues implements UnsafeValues {
 
 	@Override
 	public Advancement loadAdvancement(NamespacedKey key, String advancement) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean removeAdvancement(NamespacedKey key) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 }

@@ -10,24 +10,21 @@ public class WoolEnderDragon extends WoolComplexLivingEntity implements EnderDra
 
 	protected WoolEnderDragon(EnderDragonEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public BossBar getBossBar() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Phase getPhase() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setPhase(Phase phase) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 

@@ -12,13 +12,11 @@ public abstract class WoolComplexLivingEntity extends WoolLivingEntity implement
 
 	protected WoolComplexLivingEntity(LivingEntity handle) { // TODO NMS type
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Set<ComplexEntityPart> getParts() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 }

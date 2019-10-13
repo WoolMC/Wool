@@ -22,110 +22,97 @@ public class WoolCommandBlockSender implements BlockCommandSender {
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Server getServer() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void sendMessage(String arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void sendMessage(String[] arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin arg0, String arg1, boolean arg2) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin arg0, String arg1, boolean arg2, int arg3) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean hasPermission(String arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean hasPermission(Permission arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isPermissionSet(String arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission arg0) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void recalculatePermissions() {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void removeAttachment(PermissionAttachment arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public boolean isOp() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setOp(boolean arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public Block getBlock() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 	
 	public CommandBlockBlockEntity getHandle() {

@@ -8,106 +8,98 @@ import org.bukkit.util.Vector;
 
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 
-public abstract class WoolAbstractMinecart extends WoolVehicle implements Minecart {
+public abstract class WoolAbstractMinecart<T extends AbstractMinecartEntity> extends WoolVehicle<T> implements Minecart {
 
-	public WoolAbstractMinecart(AbstractMinecartEntity handle) {
+	public WoolAbstractMinecart(T handle) {
 		super(handle);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Vector getDerailedVelocityMod() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public MaterialData getDisplayBlock() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public BlockData getDisplayBlockData() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public int getDisplayBlockOffset() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public Vector getFlyingVelocityMod() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public double getMaxSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isSlowWhenEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setDamage(double arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setDerailedVelocityMod(Vector arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setDisplayBlock(MaterialData arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setDisplayBlockData(BlockData arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setDisplayBlockOffset(int arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setFlyingVelocityMod(Vector arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setMaxSpeed(double arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setSlowWhenEmpty(boolean arg0) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 

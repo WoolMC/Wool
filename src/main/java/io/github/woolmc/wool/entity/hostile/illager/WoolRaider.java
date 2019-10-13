@@ -6,34 +6,31 @@ import org.bukkit.entity.Raider;
 import io.github.woolmc.wool.entity.WoolMob;
 import net.minecraft.entity.raid.RaiderEntity;
 
-public abstract class WoolRaider extends WoolMob implements Raider {
+public abstract class WoolRaider<T extends RaiderEntity> extends WoolMob<T> implements Raider {
 
-	protected WoolRaider(RaiderEntity handle) {
+	protected WoolRaider(T handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Block getPatrolTarget() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setPatrolTarget(Block block) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 
 	@Override
 	public boolean isPatrolLeader() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setPatrolLeader(boolean leader) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 

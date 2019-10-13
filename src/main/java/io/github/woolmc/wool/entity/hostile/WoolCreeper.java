@@ -6,58 +6,54 @@ import org.bukkit.entity.EntityType;
 import io.github.woolmc.wool.entity.WoolMob;
 import net.minecraft.entity.mob.CreeperEntity;
 
-public class WoolCreeper extends WoolMob implements Creeper {
+public class WoolCreeper extends WoolMob<CreeperEntity> implements Creeper {
 
 	public WoolCreeper(CreeperEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean isPowered() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setPowered(boolean value) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void setMaxFuseTicks(int ticks) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public int getMaxFuseTicks() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setExplosionRadius(int radius) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public int getExplosionRadius() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void explode() {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 	@Override
 	public void ignite() {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 

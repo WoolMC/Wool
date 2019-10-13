@@ -6,7 +6,7 @@ import org.bukkit.entity.Skeleton;
 import io.github.woolmc.wool.entity.WoolMob;
 import net.minecraft.entity.mob.SkeletonEntity;
 
-public class WoolSkeleton extends WoolMob implements Skeleton {
+public class WoolSkeleton extends WoolMob<SkeletonEntity> implements Skeleton {
 
 	public WoolSkeleton(SkeletonEntity handle) {
 		super(handle);

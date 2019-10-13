@@ -12,13 +12,11 @@ public class WoolWither extends WoolMob implements Wither, Boss {
 
 	protected WoolWither(WitherEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public BossBar getBossBar() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override

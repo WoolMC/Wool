@@ -6,17 +6,15 @@ import org.bukkit.inventory.Inventory;
 
 import net.minecraft.entity.mob.PillagerEntity;
 
-public class WoolPillager extends WoolIllager implements Pillager {
+public class WoolPillager extends WoolIllager<PillagerEntity> implements Pillager {
 
 	protected WoolPillager(PillagerEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Inventory getInventory() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override

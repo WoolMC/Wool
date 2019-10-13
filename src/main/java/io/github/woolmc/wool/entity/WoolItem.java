@@ -7,29 +7,26 @@ import org.bukkit.inventory.ItemStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 
-public class WoolItem extends WoolEntity implements Item {
+public class WoolItem extends WoolEntity<ItemEntity> implements Item {
 
 	public WoolItem(ItemEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ItemStack getItemStack() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setItemStack(ItemStack stack) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 
 	@Override
 	public int getPickupDelay() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
@@ -40,10 +37,6 @@ public class WoolItem extends WoolEntity implements Item {
 	@Override
 	public EntityType getType() {
 		return EntityType.DROPPED_ITEM;
-	}
-	
-	public ItemEntity getHandle() {
-		return (ItemEntity) handle;
 	}
 
 }

@@ -30,41 +30,39 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.util.BlockRotation;
 
-public abstract class WoolEntity implements org.bukkit.entity.Entity {
+public abstract class WoolEntity<T extends Entity> implements org.bukkit.entity.Entity {
 	
-	protected WoolEntity(Entity handle) {
+	protected WoolEntity(T handle) {
 		this.handle = handle;
 	}
 	
-	protected Entity handle;
+	protected T handle;
 	
 
 	// IMPL Methods
 	
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
@@ -89,78 +87,69 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean isPermissionSet(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean isPermissionSet(Permission perm) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean hasPermission(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean hasPermission(Permission perm) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void removeAttachment(PermissionAttachment attachment) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public void recalculatePermissions() {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -191,8 +180,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public PersistentDataContainer getPersistentDataContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -211,29 +199,26 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public void setVelocity(Vector velocity) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public Vector getVelocity() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -266,35 +251,30 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean teleport(Location location) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean teleport(Location location, TeleportCause cause) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean teleport(org.bukkit.entity.Entity destination) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 	
 	@Override
 	public boolean teleport(org.bukkit.entity.Entity destination, TeleportCause cause) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public List<org.bukkit.entity.Entity> getNearbyEntities(double x, double y, double z) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -306,21 +286,19 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public int getFireTicks() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public int getMaxFireTicks() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void setFireTicks(int ticks) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
@@ -339,8 +317,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -352,14 +329,13 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean isPersistent() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void setPersistent(boolean persistent) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
@@ -372,8 +348,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean setPassenger(org.bukkit.entity.Entity passenger) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -385,57 +360,51 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean addPassenger(org.bukkit.entity.Entity passenger) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean removePassenger(org.bukkit.entity.Entity passenger) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean eject() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public float getFallDistance() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void setFallDistance(float distance) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public EntityDamageEvent getLastDamageCause() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -447,21 +416,20 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public int getTicksLived() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void setTicksLived(int value) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public void playEffect(EntityEffect type) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
@@ -474,8 +442,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public boolean leaveVehicle() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -549,57 +516,50 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	@Override
 	public int getPortalCooldown() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public void setPortalCooldown(int cooldown) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 
 
 	@Override
 	public Set<String> getScoreboardTags() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean addScoreboardTag(String tag) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public boolean removeScoreboardTag(String tag) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public PistonMoveReaction getPistonMoveReaction() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public BlockFace getFacing() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
 	@Override
 	public Pose getPose() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 
@@ -609,7 +569,7 @@ public abstract class WoolEntity implements org.bukkit.entity.Entity {
 
 	// IMPL Methods
 	
-	public Entity getHandle() {
+	public T getHandle() {
 		return handle;
 	}
 	

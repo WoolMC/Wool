@@ -5,22 +5,20 @@ import org.bukkit.entity.Evoker;
 
 import net.minecraft.entity.mob.EvokerEntity;
 
-public class WoolEvoker extends WoolSpellcaster implements Evoker {
+public class WoolEvoker extends WoolSpellcaster<EvokerEntity> implements Evoker {
 
 	protected WoolEvoker(EvokerEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public org.bukkit.entity.Evoker.Spell getCurrentSpell() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setCurrentSpell(org.bukkit.entity.Evoker.Spell spell) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 		
 	}
 

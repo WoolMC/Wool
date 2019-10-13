@@ -10,76 +10,68 @@ import org.bukkit.entity.ZombieVillager;
 
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 
-public class WoolZombieVillager extends WoolMob implements ZombieVillager {
+public class WoolZombieVillager extends WoolMob<ZombieVillagerEntity> implements ZombieVillager {
 
 	public WoolZombieVillager(ZombieVillagerEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean isBaby() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setBaby(boolean flag) {
-		// TODO Auto-generated method stub
-
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isVillager() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setVillager(boolean flag) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 
 	@Override
 	public void setVillagerProfession(Profession profession) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 
 	@Override
 	public Profession getVillagerProfession() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public boolean isConverting() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public int getConversionTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setConversionTime(int time) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 
 	@Override
 	public OfflinePlayer getConversionPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Unsupported");
 	}
 
 	@Override
 	public void setConversionPlayer(OfflinePlayer conversionPlayer) {
-		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unsupported");
 
 	}
 

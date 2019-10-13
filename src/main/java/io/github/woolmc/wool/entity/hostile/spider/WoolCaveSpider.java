@@ -6,11 +6,10 @@ import org.bukkit.entity.EntityType;
 import io.github.woolmc.wool.entity.WoolMob;
 import net.minecraft.entity.mob.CaveSpiderEntity;
 
-public class WoolCaveSpider extends WoolMob implements CaveSpider {
+public class WoolCaveSpider extends WoolMob<CaveSpiderEntity> implements CaveSpider {
 
 	protected WoolCaveSpider(CaveSpiderEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

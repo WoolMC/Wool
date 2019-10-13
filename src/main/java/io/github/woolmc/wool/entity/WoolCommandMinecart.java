@@ -7,11 +7,10 @@ import io.github.woolmc.wool.String2TextUtil;
 import net.minecraft.entity.vehicle.CommandBlockMinecartEntity;
 import net.minecraft.entity.vehicle.MinecartEntity;
 
-public class WoolCommandMinecart extends WoolAbstractMinecart implements CommandMinecart {
+public class WoolCommandMinecart extends WoolAbstractMinecart<CommandBlockMinecartEntity> implements CommandMinecart {
 
 	public WoolCommandMinecart(CommandBlockMinecartEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -32,12 +31,6 @@ public class WoolCommandMinecart extends WoolAbstractMinecart implements Command
 	@Override
 	public EntityType getType() {
 		return EntityType.MINECART_COMMAND;
-	}
-	
-	// IMPL methods
-	
-	public CommandBlockMinecartEntity getHandle() {
-		return (CommandBlockMinecartEntity) handle;
 	}
 
 }

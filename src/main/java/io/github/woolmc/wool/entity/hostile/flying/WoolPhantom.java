@@ -5,16 +5,14 @@ import org.bukkit.entity.Phantom;
 
 import net.minecraft.entity.mob.PhantomEntity;
 
-public class WoolPhantom extends WoolFlyingEntity implements Phantom {
+public class WoolPhantom extends WoolFlyingEntity<PhantomEntity> implements Phantom {
 
 	public WoolPhantom(PhantomEntity handle) {
 		super(handle);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
 		return getHandle().getPhantomSize();
 	}
 
@@ -26,10 +24,6 @@ public class WoolPhantom extends WoolFlyingEntity implements Phantom {
 	@Override
 	public EntityType getType() {
 		return EntityType.PHANTOM;
-	}
-
-	public PhantomEntity getHandle() {
-		return (PhantomEntity) this.handle;
 	}
 	
 }
