@@ -1,5 +1,6 @@
 package io.github.woolmc.wool.entity;
 
+import net.minecraft.block.PortalBlock;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Minecart;
@@ -7,12 +8,14 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class WoolAbstractMinecart<T extends AbstractMinecartEntity> extends WoolVehicle<T> implements Minecart {
 
 	public WoolAbstractMinecart(T handle) {
 		super(handle);
 		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -20,16 +23,19 @@ public abstract class WoolAbstractMinecart<T extends AbstractMinecartEntity> ext
 		throw new UnsupportedOperationException("Unsupported");
 	}
 
+	@NotNull
 	@Override
 	public Vector getDerailedVelocityMod() {
 		throw new UnsupportedOperationException("Unsupported");
 	}
 
+	@NotNull
 	@Override
 	public MaterialData getDisplayBlock() {
 		throw new UnsupportedOperationException("Unsupported");
 	}
 
+	@NotNull
 	@Override
 	public BlockData getDisplayBlockData() {
 		throw new UnsupportedOperationException("Unsupported");

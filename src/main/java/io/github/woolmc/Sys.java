@@ -22,11 +22,11 @@ public class Sys {
 	 * Utility class
 	 */
 	private Sys() {
-		Sys.dbg("Debug");
 		Sys.err("Error");
-		Sys.cfg("Relief");
-		Sys.inf("Info");
 		Sys.wrn("Warn");
+		Sys.dbg("Debug");
+		Sys.cfg("Config");
+		Sys.inf("Info");
 	}
 
 	private static final Logger LOGGER = Logger.getLogger("WoolMC");
